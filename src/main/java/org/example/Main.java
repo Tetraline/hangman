@@ -15,8 +15,9 @@ public class Main {
             io.printGameState();
             System.out.println("Enter guess");
             char guess = scanner.nextLine().charAt(0);
-            io.makeGuess(guess);
+            wordComplete = io.makeGuess(guess);
         }
+        System.out.println("Well Done!");
         //String userName = myObj.nextLine();  // Read user input
         //System.out.println("Username is: " + userName);  // Output user input
     }

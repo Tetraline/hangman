@@ -19,4 +19,7 @@ public class Letter {
     public char getLetter(){
         return letter;
     }
+    public boolean isGuessed(){
+        return guessed;
+    }
 }
