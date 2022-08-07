@@ -6,10 +6,12 @@ public class IO {
     Letter[] letterArray;
     String targetWord;
     ArrayList<Character> triedChars = new ArrayList<Character>();
+    int score;
 
     public IO(String targetWord) {
         letterArray = new Letter[targetWord.length()];
         this.targetWord = targetWord;
+        score = 0;
         for (int i = 0; i < targetWord.length(); i++) {
             letterArray[i] = new Letter(targetWord.charAt(i));
         }
@@ -18,6 +20,7 @@ public class IO {
     public void printGameState() {
         System.out.println("Target word: " + targetWord);
         System.out.println("Tried letters: " + triedChars.toString());
+        System.out.println("Score: " + score);
         for (Letter letter : letterArray) {
             System.out.print(letter.getOutputChar());
         }
@@ -39,6 +42,7 @@ public class IO {
         }
         // Add the guess to the list of previous guesses
         triedChars.add(guess);
+        score = triedChars.size();
         // Check if the word is complete
         for (Letter letter : letterArray) {
             if (!letter.isGuessed()) {
