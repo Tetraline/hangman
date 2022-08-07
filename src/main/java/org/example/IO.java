@@ -1,17 +1,23 @@
 package org.example;
 
+import java.util.ArrayList;
+
 public class IO {
-    Letter[] letterArray = {};
+    Letter[] letterArray;
     String targetWord;
-    public IO(String targetWord){
+    ArrayList<Character> triedChars = new ArrayList<Character>();
+
+    public IO(String targetWord) {
         letterArray = new Letter[targetWord.length()];
         this.targetWord = targetWord;
         for (int i = 0; i < targetWord.length(); i++) {
             letterArray[i] = new Letter(targetWord.charAt(i));
         }
     }
-    public void printGameState(){
+
+    public void printGameState() {
         System.out.println("Target word: " + targetWord);
+        System.out.println("Tried letters: " + triedChars.toString());
         for (Letter letter : letterArray) {
             System.out.print(letter.getOutputChar());
         }
@@ -20,14 +26,22 @@ public class IO {
 
     // Make a guess
     // Returns true if the word is complete
-    public boolean makeGuess(char guess){
+    public boolean makeGuess(char guess) {
+        // Check if the guess has been made before
+        if (triedChars.contains(guess)) {
+            return false;
+        }
+        // Check if the guess matches any of the letters
         for (Letter letter : letterArray) {
-            if(guess == letter.getLetter()){
+            if (guess == letter.getLetter()) {
                 letter.guess();
             }
         }
+        // Add the guess to the list of previous guesses
+        triedChars.add(guess);
+        // Check if the word is complete
         for (Letter letter : letterArray) {
-            if(!letter.isGuessed()){
+            if (!letter.isGuessed()) {
                 return false;
             }
         }
